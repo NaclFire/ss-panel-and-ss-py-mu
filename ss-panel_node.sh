@@ -36,7 +36,7 @@ install_ss_panel(){
 	wget -c https://raw.githubusercontent.com/NaclFire/ss-panel/master/lnmp1.3.zip && unzip lnmp1.3.zip && cd lnmp1.3 && chmod +x install.sh && ./install.sh lnmp
 	chattr -i /home/wwwroot/default/.user.ini
 	rm -rf /home/wwwroot/default
-	git clone https://github.com/mmmwhy/ss-panel.git "/home/wwwroot/default"
+	git clone https://github.com/NaclFire/ss-panel.git "/home/wwwroot/default"
 	cd /home/wwwroot/default
 	curl -sS https://install.phpcomposer.com/installer | php
 	chmod +x composer.phar
