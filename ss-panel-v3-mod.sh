@@ -262,7 +262,7 @@ install_node(){
 	echo "/usr/bin/supervisord -c /etc/supervisord.conf" >> /etc/rc.local
 	chmod +x /etc/rc.d/rc.local
 	echo "#############################################################"
-	echo "# 安装完成，节点即将重启使配置生效                             #"
+	echo "# The installation is complete                              #"
 	echo "# Github: https://github.com/mmmwhy/ss-panel-and-ss-py-mu   #"
 	echo "# Author: 91vps                                             #"
 	echo "#############################################################"
@@ -344,7 +344,7 @@ install_node_db(){
 	echo "/usr/bin/supervisord -c /etc/supervisord.conf" >> /etc/rc.local
 	chmod +x /etc/rc.d/rc.local
 	echo "#############################################################"
-	echo "# 安装完成，节点即将重启使配置生效                             #"
+	echo "# The installation is complete                              #"
 	echo "# Github: https://github.com/mmmwhy/ss-panel-and-ss-py-mu   #"
 	echo "# Author: 91vps                                             #"
 	echo "#############################################################"
@@ -397,7 +397,7 @@ num=$1
 if [ "${num}" == "1" ]; then
     install_panel_and_node 1
 else
-    stty erase '^H' && read -p " 请输入数字 [1-3]:" num
+    stty erase '^H' && read -p " Please enter number [1-3]:" num
 		case "$num" in
 		1)
 		install_panel_and_node
@@ -409,7 +409,7 @@ else
 		install_node_db
 		;;
 		*)
-		echo "请输入正确数字 [1-3]"
+		echo "Please enter the correct number [1-3]"
 		;;
 	esac
 fi
