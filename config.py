@@ -28,7 +28,7 @@ MYSQL_TIMEOUT = 30
 # Shadowsocks MultiUser API Settings
 API_URL = 'https://ss.91vps.club/mu'
 # API Key (you can find this in the .env file if you are using SS-Panel V3)
-API_PASS = 'mmmwhy'
+API_PASS = 'NaclFire'
 NODE_ID = '1'
 
 # Time interval between 2 pulls from the database or API
