@@ -32,14 +32,21 @@ install_ss_panel_mod_v3(){
 	php -n xcat initdownload
 	php xcat initQQWry
 	yum -y install vixie-cron crontabs
-	rm -rf /var/spool/cron/root
-	echo 'SHELL=/bin/bash' >> /var/spool/cron/root
-	echo 'PATH=/sbin:/bin:/usr/sbin:/usr/bin' >> /var/spool/cron/root
-	echo '*/20 * * * * /usr/sbin/ntpdate pool.ntp.org > /dev/null 2>&1' >> /var/spool/cron/root
-	echo '30 22 * * * php /home/wwwroot/default/xcat sendDiaryMail' >> /var/spool/cron/root
-	echo '0 0 * * * php /home/wwwroot/default/xcat dailyjob' >> /var/spool/cron/root
-	echo '*/1 * * * * php /home/wwwroot/default/xcat checkjob' >> /var/spool/cron/root
-	/sbin/service crond restart
+	echo '*/20 * * * * /usr/sbin/ntpdate pool.ntp.org > /dev/null 2>&1' >> /etc/crontab
+	echo '30 22 * * * php /home/wwwroot/default/xcat sendDiaryMail' >> /etc/crontab
+	echo '0 0 * * * php /home/wwwroot/default/xcat dailyjob' >> /etc/crontab
+	echo '*/1 * * * * php /home/wwwroot/default/xcat checkjob' >> /etc/crontab
+	echo '1 * * * * root supervisorctl restart ssr'>> /etc/crontab
+	crontab /etc/crontab
+	#rm -rf /var/spool/cron/root
+	#echo 'SHELL=/bin/bash' >> /var/spool/cron/root
+	#echo 'PATH=/sbin:/bin:/usr/sbin:/usr/bin' >> /var/spool/cron/root
+	#echo '*/20 * * * * /usr/sbin/ntpdate pool.ntp.org > /dev/null 2>&1' >> /var/spool/cron/root
+	#echo '30 22 * * * php /home/wwwroot/default/xcat sendDiaryMail' >> /var/spool/cron/root
+	#echo '0 0 * * * php /home/wwwroot/default/xcat dailyjob' >> /var/spool/cron/root
+	#echo '*/1 * * * * php /home/wwwroot/default/xcat checkjob' >> /var/spool/cron/root
+	#/sbin/service crond restart
+	
 }
 Libtest(){
 	#自动选择下载节点
@@ -258,6 +265,10 @@ install_node(){
 	iptables -I INPUT -p udp -m udp --dport 22:65535 -j ACCEPT
 	iptables-save >/etc/sysconfig/iptables
 	iptables-save >/etc/sysconfig/iptables
+	yum -y install vixie-cron crontabs
+	echo '1 * * * * root supervisorctl restart ssr'>> /etc/crontab
+	echo '0 3 * * * root /sbin/reboot'>> /etc/crontab
+	crontab /etc/crontab
 	echo 'iptables-restore /etc/sysconfig/iptables' >> /etc/rc.local
 	echo "/usr/bin/supervisord -c /etc/supervisord.conf" >> /etc/rc.local
 	chmod +x /etc/rc.d/rc.local
@@ -382,6 +393,7 @@ install_panel_and_node(){
 	echo "#############################################################"
 	reboot now
 }
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 echo
 echo "#############################################################"
 echo "# One click Install SS-panel and Shadowsocks-Py-Mu          #"
