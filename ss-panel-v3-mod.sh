@@ -36,7 +36,7 @@ install_ss_panel_mod_v3(){
 	echo '30 22 * * * php /home/wwwroot/default/xcat sendDiaryMail' >> /etc/crontab
 	echo '0 0 * * * php /home/wwwroot/default/xcat dailyjob' >> /etc/crontab
 	echo '*/1 * * * * php /home/wwwroot/default/xcat checkjob' >> /etc/crontab
-	echo '1 * * * * root supervisorctl restart ssr'>> /etc/crontab
+	#echo '1 * * * * root supervisorctl restart ssr'>> /etc/crontab
 	crontab /etc/crontab
 	#rm -rf /var/spool/cron/root
 	#echo 'SHELL=/bin/bash' >> /var/spool/cron/root
@@ -267,7 +267,7 @@ install_node(){
 	iptables-save >/etc/sysconfig/iptables
 	yum -y install vixie-cron crontabs
 	echo '1 * * * * root supervisorctl restart ssr'>> /etc/crontab
-	echo '0 3 * * * root /sbin/reboot'>> /etc/crontab
+	#echo '0 3 * * * root /sbin/reboot'>> /etc/crontab
 	crontab /etc/crontab
 	echo 'iptables-restore /etc/sysconfig/iptables' >> /etc/rc.local
 	echo "/usr/bin/supervisord -c /etc/supervisord.conf" >> /etc/rc.local
