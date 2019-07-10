@@ -35,7 +35,7 @@ install_ss_panel_mod_v3(){
 	echo '*/20 * * * * /usr/sbin/ntpdate pool.ntp.org > /dev/null 2>&1' >> /etc/crontab
 	echo '30 22 * * * php /home/wwwroot/default/xcat sendDiaryMail' >> /etc/crontab
 	echo '0 0 * * * php /home/wwwroot/default/xcat dailyjob' >> /etc/crontab
-	#echo '*/1 * * * * php /home/wwwroot/default/xcat checkjob' >> /etc/crontab
+	echo '*/1 * * * * php /home/wwwroot/default/xcat checkjob' >> /etc/crontab
 	#echo '1 * * * * root supervisorctl restart ssr'>> /etc/crontab
 	crontab /etc/crontab
 	#rm -rf /var/spool/cron/root
